@@ -9,7 +9,7 @@ export class User {
     ){}
 
     getId(): string {
-        return this.id;
+        return this.id; 
     }
 
     getEmail(): string {

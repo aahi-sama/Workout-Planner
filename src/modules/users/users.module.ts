@@ -3,12 +3,14 @@ import { UserRepository } from './domain/repositories/user.repositories';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { USER_REPOSITORY } from './users.tokens';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmUserRepository } from './infrastructure/repositories/typeorm-user.repository';
 
 @Module({
   controllers: [UsersController],
   providers: [UsersService,{
     provide: USER_REPOSITORY,
-    useClass: UserRepository,
+    useClass:  TypeOrmUserRepository,
   }]
 })
 export class UsersModule {
