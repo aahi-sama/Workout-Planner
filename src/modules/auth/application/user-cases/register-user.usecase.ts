@@ -45,7 +45,7 @@ export class RegisteruserUserCase {
         sub: createdUser.id,
         email: createdUser.email,
     });
-    return {
+    return { 
         user:createdUser,
         ...tokens,
     }

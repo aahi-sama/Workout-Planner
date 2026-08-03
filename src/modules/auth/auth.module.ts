@@ -10,6 +10,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtTokenService } from './infrastructure/jwt/jwt.token.service';
 import { config } from 'rxjs';
+import { LoginUserUserCase } from './application/user-cases/login-user.usecase';
 
 @Module({
     imports: [UsersModule,
@@ -31,7 +32,7 @@ import { config } from 'rxjs';
             provide: PASSWORD_HASHER,
             useClass: BcryptPasswordHasher,
         },
-        RegisteruserUserCase,
+        RegisteruserUserCase,LoginUserUserCase,
         {
             provide: TOKEN_SERVICE,
             useClass: JwtTokenService,

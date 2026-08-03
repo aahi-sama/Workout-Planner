@@ -17,11 +17,10 @@ export class CreateUserUseCase {
 
 
     async execute(dto:CreateUserDto) : Promise <User | null >{
-        const exsitingUser = await this.userRepository.findByEmail(dto.email)
+        // const exsitingUser = await this.userRepository.findByEmail(dto.email)
 
-        if(exsitingUser){
-            throw new ConflictException ('there is already use with this email')
-        }
+        // if(exsitingUser){
+        //     throw new ConflictException ('there is already use with this email')
 
         const user = new User (
             randomUUID(),

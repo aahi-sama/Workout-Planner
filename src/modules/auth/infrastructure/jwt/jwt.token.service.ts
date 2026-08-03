@@ -4,7 +4,7 @@ import { AuthTokens, TokenPayload } from "../../application/interfaces/token-ser
 
 
 @Injectable()
-export class JwtTokenService implements JwtTokenService{
+export class JwtTokenService {
     constructor(
         private readonly jwtService:JwtService,
     ){}
