@@ -43,4 +43,10 @@ export class TypeOrmUserRepository implements UserRepository{
 
         return UserMapper.toDomain(user)
     }
+
+    async findAll(): Promise <User[] | null>{
+        const users = await this.repository.find()
+
+        return users.map(UserMapper.toDomain);
+    }
     }

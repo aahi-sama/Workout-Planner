@@ -9,6 +9,7 @@ import { CreateUserUseCase } from './application/use-cases/create-user.use-case'
 import { UserOrmEntity } from './infrastructure/entites/user-orm.entity';
 import { UpdateUser } from './application/use-cases/update-user.use-case';
 import { GetUserById } from './application/use-cases/get-user-by-id.use-case';
+import { findAllUser } from './application/use-cases/findalluser.usecase';
 
 @Module({
     imports: [
@@ -19,7 +20,7 @@ import { GetUserById } from './application/use-cases/get-user-by-id.use-case';
   providers: [CreateUserUseCase,{
     provide: USER_REPOSITORY,
     useClass:  TypeOrmUserRepository,
-  },CreateUserUseCase,UpdateUser,GetUserById
+  },CreateUserUseCase,UpdateUser,GetUserById,findAllUser
 
 ],
 exports: [
