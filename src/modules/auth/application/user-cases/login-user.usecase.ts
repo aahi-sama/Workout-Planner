@@ -31,18 +31,17 @@ export class LoginUserUserCase{
     const isPassword = await this.hashedPassword.compare(
         dto.password,
         user.password,
-    )
+    );
 
-    if(!isPassword){
-        throw new UnauthorizedException('Invalid password or email')
+    if (!isPassword) {
+        throw new UnauthorizedException('Invalid password or email');
     }
 
-    const acessToken = await this.tokenService.generteTokens({
-        sub :user.id,
+    const tokens = await this.tokenService.generateTokens({
+        sub: user.id,
         email: user.email,
-    })
-    return {
-        acessToken,
-    }
+    });
+
+    return tokens;
     }
 }

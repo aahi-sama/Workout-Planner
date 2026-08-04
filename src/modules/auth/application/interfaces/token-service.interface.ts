@@ -6,10 +6,10 @@ export interface TokenPayload {
 }
 
 export interface AuthTokens {
-    accessToken:string;
-    refreshToken:string;
+    accessToken: string;
+    refreshToken: string;
 }
 
 export interface TokenService {
-    generateToken(payload: TokenPayload): Promise<AuthTokens>;
+    generateTokens(payload: TokenPayload): Promise<AuthTokens>;
 }

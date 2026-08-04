@@ -1,5 +1,5 @@
 export interface Logger {
-    info (message: string, context?: Record<string, unknown>): void;
+    log (message: string, context?: Record<string, unknown>): void;
     warn (message: string, context?: Record <string, unknown>): void;
 
 

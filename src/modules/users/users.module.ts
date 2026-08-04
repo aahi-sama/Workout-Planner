@@ -10,6 +10,7 @@ import { UserOrmEntity } from './infrastructure/entites/user-orm.entity';
 import { UpdateUser } from './application/use-cases/update-user.use-case';
 import { GetUserById } from './application/use-cases/get-user-by-id.use-case';
 import { findAllUser } from './application/use-cases/findalluser.usecase';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
     imports: [

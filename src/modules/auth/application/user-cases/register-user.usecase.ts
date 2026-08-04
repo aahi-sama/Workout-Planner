@@ -41,14 +41,14 @@ export class RegisteruserUserCase {
 
     const createdUser = await this.userrepository.save(user);
 
-    const tokens = await this.tokenService.generteTokens({
+    const tokens = await this.tokenService.generateTokens({
         sub: createdUser.id,
         email: createdUser.email,
     });
-    return { 
-        user:createdUser,
+    return {
+        user: createdUser,
         ...tokens,
-    }
+    };
     }
 
  }

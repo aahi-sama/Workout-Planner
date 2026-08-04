@@ -11,11 +11,14 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtTokenService } from './infrastructure/jwt/jwt.token.service';
 import { config } from 'rxjs';
 import { LoginUserUserCase } from './application/user-cases/login-user.usecase';
+import { JwtStrategy } from './infrastructure/jwt/jwt.strategy';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
     imports: [UsersModule,
         ConfigModule,
         JwtModule.registerAsync({
+            global: true,
             inject: [ConfigService],
             useFactory: (config:ConfigService) => ({
                 // console.log(config.get('JWT_SECRET'))
@@ -24,10 +27,14 @@ import { LoginUserUserCase } from './application/user-cases/login-user.usecase';
 
                 secret:config.get<string>('JWT_SECRET'),
             })
-        })
+        }),
+
+        PassportModule.register({
+            defaultStrategy: 'jwt',
+        }),
     ],
     controllers: [AuthController],
-    providers:[
+    providers:[ JwtStrategy,
         {
             provide: PASSWORD_HASHER,
             useClass: BcryptPasswordHasher,
