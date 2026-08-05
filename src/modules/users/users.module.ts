@@ -11,6 +11,7 @@ import { UpdateUser } from './application/use-cases/update-user.use-case';
 import { GetUserById } from './application/use-cases/get-user-by-id.use-case';
 import { findAllUser } from './application/use-cases/findalluser.usecase';
 import { AuthModule } from '../auth/auth.module';
+import { GetProfileUseCase } from './application/use-cases/get-profile.use-case';
 
 @Module({
     imports: [
@@ -18,10 +19,10 @@ import { AuthModule } from '../auth/auth.module';
     ],
     
   controllers: [UsersController],
-  providers: [CreateUserUseCase,{
+  providers: [{
     provide: USER_REPOSITORY,
     useClass:  TypeOrmUserRepository,
-  },CreateUserUseCase,UpdateUser,GetUserById,findAllUser
+  },CreateUserUseCase,UpdateUser,GetUserById,findAllUser, GetProfileUseCase,
 
 ],
 exports: [

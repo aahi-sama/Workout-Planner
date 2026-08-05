@@ -49,4 +49,24 @@ export class TypeOrmUserRepository implements UserRepository{
 
         return users.map(UserMapper.toDomain);
     }
+
+
+    async update(user: User): Promise <User> {
+        const ormUser = await this.repository.findOne({
+            where: { id: user.id}
+        });
+
+        if(!ormUser){
+            throw new NotFoundException('User Not Found')
+        }
+
+        ormUser.name = user.name;
+        ormUser.email = user.email;
+
+        const savedUser = await this.repository.save(ormUser);
+
+
+        
+        return UserMapper.toDomain(savedUser)
+    }
     }
