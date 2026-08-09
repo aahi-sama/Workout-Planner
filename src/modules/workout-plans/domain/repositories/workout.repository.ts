@@ -4,7 +4,7 @@ import { Workout } from "../entites/workout.entity";
 export interface WorkoutRepository {
     create(workout: Workout): Promise < Workout >;
 
-    findById(id: string): Promise < Workout >;
+    findById(userId: string): Promise < Workout [] >;
 
     // findAll(workout: Workout) : Promise <Workout []>;
 

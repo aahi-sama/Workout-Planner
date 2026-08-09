@@ -3,7 +3,7 @@ export class WorkoutExercise {
         public readonly id: string,
         public readonly workoutId: string,
         public readonly exerciseId: string,
-        public set: number,
-        public reps: number,
+        public set: string,
+        public reps: string,
     ){}
 }

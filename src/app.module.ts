@@ -5,6 +5,7 @@ import { typeOrmConfig } from './infrastructure/database/typeorm.config';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { LoggerModule } from 'nestjs-pino';
+import { WorkoutController } from './workout/workout.controller';
 
 @Module({
   imports: [AuthModule,UsersModule,
@@ -26,6 +27,7 @@ import { LoggerModule } from 'nestjs-pino';
         typeOrmConfig(configService)
     })
   ],
+  controllers: [WorkoutController],
   // providers: [AppService],
 })
 export class AppModule {}

@@ -31,4 +31,4 @@ export class ExerciseOrmEnity{
         (WorkoutExercise) => WorkoutExercise.exercise,
     )
     workoutExercise: WorkoutExerciseOrmEnity[]
-}
+} 
