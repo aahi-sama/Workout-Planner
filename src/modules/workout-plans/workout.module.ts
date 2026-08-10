@@ -5,8 +5,9 @@ import { ExerciseOrmEnity } from "./infrastructure/entites/exercise-orm.entity";
 import { WorkoutExerciseOrmEnity } from "./infrastructure/entites/workout-exerciseOrm.entity";
 import { workoutControlloer } from "./workout.controller";
 import { TypeOrmWorkoutRepository } from "./infrastructure/repositories/workout.typeorm.repositories";
-import { EXERCISE_REPOSITORY, WORKOUT_REPOSITORY } from "./workout.token";
+import { EXERCISE_REPOSITORY, WORKOUT_REPOSITORY, WORKOUTEXERCISE_REPOSITORY } from "./workout.token";
 import { TypeOrmExerciseReposioty } from "./infrastructure/repositories/typeorm-exercise.reposiory";
+import { TypeOrmWorkoutExerciseRepository } from "./infrastructure/repositories/typeorm-exercise-workout.repository";
 
 
 
@@ -29,6 +30,10 @@ import { TypeOrmExerciseReposioty } from "./infrastructure/repositories/typeorm-
         {
             provide: EXERCISE_REPOSITORY,
             useClass: TypeOrmExerciseReposioty,
+        },
+        {
+            provide: WORKOUTEXERCISE_REPOSITORY,
+            useClass: TypeOrmWorkoutExerciseRepository,
         }
     ]
 

@@ -4,7 +4,6 @@ import { WorkoutRepository } from "../../domain/repositories/workout.repository"
 import { WorkoutOrmEnity } from "../entites/workout-orm.entity";
 import { Repository } from "typeorm";
 import { Workout } from "../../domain/entites/workout.entity";
-import { throws } from "assert";
 
 
 @Injectable()
@@ -16,6 +15,8 @@ export class TypeOrmWorkoutRepository implements WorkoutRepository {
     ){}
 
     async create(workout: Workout): Promise <Workout>{
+
+        
         const entity = this.workoutRepository.create({
             id: workout.id,
             userId: workout.userId,
@@ -24,7 +25,6 @@ export class TypeOrmWorkoutRepository implements WorkoutRepository {
         })
 
         const saved = await this.workoutRepository.save(entity)
-
         return new Workout(
             saved.id,
             saved.userId,
@@ -40,18 +40,7 @@ export class TypeOrmWorkoutRepository implements WorkoutRepository {
             where: {userId}
         })
 
-        return workout.map(
-            (workout) => new Workout(
-                workout.id,
-                workout.userId,
-                workout.name,
-                workout.day,
-                workout.createdAt,
-                workout.updatedAt,
-            )
-                
-            
-        )
+        return workout
     }
 
     async update (workout: Workout) : Promise <Workout> {
