@@ -42,8 +42,9 @@ export class WorkOutController {
     ){
         return this.workoutservice.update(
             user.id,
+            dto,
             workoutId,
-            dto
+            
         )
     }
     @Delete(':id')
