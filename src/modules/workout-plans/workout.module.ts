@@ -8,6 +8,10 @@ import { TypeOrmWorkoutRepository } from "./infrastructure/repositories/workout.
 import { EXERCISE_REPOSITORY, WORKOUT_REPOSITORY, WORKOUTEXERCISE_REPOSITORY } from "./workout.token";
 import { TypeOrmExerciseReposioty } from "./infrastructure/repositories/typeorm-exercise.reposiory";
 import { TypeOrmWorkoutExerciseRepository } from "./infrastructure/repositories/typeorm-exercise-workout.repository";
+import { GetPreloadedWorkoutsUseCase } from "./application/use-cases/get-preload-workout.usecase";
+import { CreateWorkout } from "./application/use-cases/create-workout.usescase";
+import { findAllWorkoutById } from "./application/use-cases/findAll-workout.usecase";
+import { updateWorkout } from "./application/use-cases/update-workout.usecase";
 
 
 
@@ -22,7 +26,7 @@ import { TypeOrmWorkoutExerciseRepository } from "./infrastructure/repositories/
 
     controllers: [workoutControlloer],
 
-    providers: [ 
+    providers: [ GetPreloadedWorkoutsUseCase, CreateWorkout, findAllWorkoutById, updateWorkout,
         {
             provide: WORKOUT_REPOSITORY,
             useClass: TypeOrmWorkoutRepository

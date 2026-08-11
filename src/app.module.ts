@@ -5,10 +5,9 @@ import { typeOrmConfig } from './infrastructure/database/typeorm.config';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { LoggerModule } from 'nestjs-pino';
-import { WorkoutController } from './workout/workout.controller';
-
+import { WorkoutModule } from './modules/workout-plans/workout.module';
 @Module({
-  imports: [AuthModule,UsersModule,
+  imports: [AuthModule,UsersModule,WorkoutModule,
     LoggerModule.forRoot({
       pinoHttp: {
         transport: {
@@ -27,7 +26,7 @@ import { WorkoutController } from './workout/workout.controller';
         typeOrmConfig(configService)
     })
   ],
-  controllers: [WorkoutController],
+  controllers: [],
   // providers: [AppService],
 })
 export class AppModule {}
