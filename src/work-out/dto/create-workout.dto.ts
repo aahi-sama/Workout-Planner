@@ -4,7 +4,7 @@ import { WeekDay } from "../workout.enttiy";
 
 export class CreateWorkoutDto {
 
-    @IsUUID()
+    @IsString()
     preloadWorkoutId : string;
 
     @IsEnum(WeekDay)

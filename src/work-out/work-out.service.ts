@@ -17,10 +17,23 @@ export class WorkOutService implements WorkoutServiceInterface {
         userId: string,
         dto: CreateWorkoutDto,
     ) : Promise <WorkoutEnity>{
+
+        const preloadWorkout = PRELOADED_WORKOUTS.find(
+            (workout) => workout.id=== dto.preloadWorkoutId,
+        )
+        
+       
+
+        if(!preloadWorkout){
+            throw new NotFoundException(
+                'PRELOAD WORKOUT NOT FOUND'
+            )
+        }
         const workout = new WorkoutEnity();
+      
 
         workout.userId = userId;
-        workout.preloadWorkoutId = dto.preloadWorkoutId;
+        workout.preloadWorkout = preloadWorkout.name;
         workout.weekDay = dto.weekDay;
 
         return this.workoutRepository.create(workout)
@@ -59,7 +72,10 @@ export class WorkOutService implements WorkoutServiceInterface {
         )
 
         if(dto.preloadWorkoutId !== undefined){
-            workout.preloadWorkoutId = dto.preloadWorkoutId;
+            const preloadWorkout = PRELOADED_WORKOUTS.find(
+                (workout) => workout.id === dto.preloadWorkoutId,
+            )
+             workout.preloadWorkout = preloadWorkout.name
         }
 
         if(dto.weekDay ! == undefined ){

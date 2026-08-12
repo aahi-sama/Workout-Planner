@@ -7,6 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { LoggerModule } from 'nestjs-pino';
 import { WorkOutController } from './work-out/work-out.controller';
 import { WorkOutModule } from './work-out/work-out.module';
+import { ExerciseModule } from './exercise/exercise.module';
 @Module({
   imports: [AuthModule,UsersModule,WorkOutModule,
     LoggerModule.forRoot({
@@ -27,7 +28,9 @@ import { WorkOutModule } from './work-out/work-out.module';
         typeOrmConfig(configService)
     }),
 
-    WorkOutModule
+    WorkOutModule,
+
+    ExerciseModule
   ],
   controllers: [WorkOutController],
   // providers: [AppService],

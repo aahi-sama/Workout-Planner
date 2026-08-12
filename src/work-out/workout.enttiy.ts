@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { typeOrmConfig } from "../infrastructure/database/typeorm.config";
+import { UserOrmEntity } from "../modules/users/infrastructure/entites/user-orm.entity";
 
 
 
@@ -20,7 +22,16 @@ export class WorkoutEnity {
     @Column()
     userId: string;
 
-    
+    @ManyToOne(
+        ()=>UserOrmEntity,
+        (user) => user.workouts,
+        {
+            onDelete: 'CASCADE'
+        }
+    )
+
+    @JoinColumn({ name: 'userId'})
+    user: UserOrmEntity;
 
     @Column({
         type : 'enum',
@@ -28,10 +39,8 @@ export class WorkoutEnity {
     })
     weekDay: WeekDay;
 
-    @Column({
-        type: 'varchar', nullable: true
-    })
-    preloadWorkoutId: string | null;
+    @Column()
+    preloadWorkout: string | null;
 
     @Column({
         type :'timestamp', default: () => 'CURRENT_TIMESTAMP'

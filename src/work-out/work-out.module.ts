@@ -12,7 +12,7 @@ import { WorkoutRepository } from './workout.repository';
 
   controllers: [ WorkOutController],
 
-  providers: [WorkOutService, WorkOutService, WorkoutRepository], 
+  providers: [ WorkOutService, WorkoutRepository], 
 
   exports: [WorkOutService]
 })

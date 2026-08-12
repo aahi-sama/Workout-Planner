@@ -4,7 +4,9 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToMany,
 } from 'typeorm'
+import { WorkoutEnity } from '../../../../work-out/workout.enttiy';
 
 @Entity('users')
 export class UserOrmEntity {
@@ -29,5 +31,10 @@ export class UserOrmEntity {
 
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(
+        () => WorkoutEnity, (workout) => workout.user
+    )
+    workouts: WorkoutEnity [];
 
 }
