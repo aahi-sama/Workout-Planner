@@ -49,11 +49,11 @@ export class WorkOutController {
     }
     @Delete(':id')
     async delete(
-        @CurrentUser() user: {id:string},
+        // @CurrentUser() user: {id:string},
         @Param('id') workoutId:string,
     ){
         await this.workoutservice.delete(
-            user.id,
+            // user.id,
             workoutId,
         )
     }

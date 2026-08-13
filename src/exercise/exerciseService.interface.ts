@@ -4,7 +4,8 @@ import { ExerciseEntity } from './exercise.entity'
 
  export interface ExerciseServiceInterface {
     create(
-         workoutId: string,
+        userId: string,
+        //  workoutId: string,
         dto: CreateExerciseDto,
     ): Promise < ExerciseEntity >;
 

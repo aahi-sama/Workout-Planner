@@ -9,7 +9,7 @@ import { WorkOutController } from './work-out/work-out.controller';
 import { WorkOutModule } from './work-out/work-out.module';
 import { ExerciseModule } from './exercise/exercise.module';
 @Module({
-  imports: [AuthModule,UsersModule,WorkOutModule,
+  imports: [AuthModule,UsersModule,WorkOutModule, ExerciseModule,
     LoggerModule.forRoot({
       pinoHttp: {
         transport: {

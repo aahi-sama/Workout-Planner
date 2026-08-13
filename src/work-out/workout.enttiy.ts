@@ -1,6 +1,7 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { typeOrmConfig } from "../infrastructure/database/typeorm.config";
 import { UserOrmEntity } from "../modules/users/infrastructure/entites/user-orm.entity";
+import { ExerciseEntity } from "../exercise/exercise.entity";
 
 
 
@@ -14,7 +15,7 @@ export enum WeekDay {
     SATURDAY = 'SATURDAY',
 }
 
-@Entity('workoouts')
+@Entity('workout')
 export class WorkoutEnity {
     @PrimaryGeneratedColumn('uuid')
     id:string;
@@ -29,6 +30,13 @@ export class WorkoutEnity {
             onDelete: 'CASCADE'
         }
     )
+
+    // @OneToMany(
+    //     ()=> ExerciseEntity,
+    //     (exercise) => exercise.workout
+    // )
+
+    // exercises: ExerciseEntity[]
 
     @JoinColumn({ name: 'userId'})
     user: UserOrmEntity;

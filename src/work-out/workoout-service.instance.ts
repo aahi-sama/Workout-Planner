@@ -23,7 +23,7 @@ export interface WorkoutServiceInterface {
     
 
     delete(
-        userId: string,
+        
         workoutId: string,
     ): Promise <void>
 }

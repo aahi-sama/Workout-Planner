@@ -25,21 +25,24 @@ export class WorkoutRepository {
         })
     }
 
-    async findById(workoutId: string, userId: string) : Promise <WorkoutEnity>{
-        return this.repository.findOne({
+    async findById(workoutId: string) : Promise <WorkoutEnity>{
+        const workout= await this.repository.findOne({
             where: {
                 id: workoutId,
-                userId,
+                
             }
 
         });
+        console.log('workout:', workout);
+        return workout;
     }
 
     async update (workout: WorkoutEnity): Promise<WorkoutEnity> {
         return this.repository.save(workout);
     }
 
-    async delete (workout: WorkoutEnity) : Promise <void> {
-        await this.repository.delete(workout)
+    async delete (workout: WorkoutEnity) : Promise <string> {
+        await this.repository.delete(workout.id)
+        return "workout deleted Sucessfully"
     }
 }

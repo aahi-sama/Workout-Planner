@@ -6,6 +6,8 @@ import { CreateWorkoutDto } from './dto/create-workout.dto';
 import { WorkoutEnity } from './workout.enttiy';
 import { UpdateWorkoutDto } from './dto/update-workout.dto';
 import { PRELOADED_WORKOUTS } from './data/preloaded-workout';
+import { throwError } from 'rxjs';
+import { dot } from 'node:test/reporters';
 
 @Injectable()
 export class WorkOutService implements WorkoutServiceInterface {
@@ -46,11 +48,11 @@ export class WorkOutService implements WorkoutServiceInterface {
     }
 
     async findById(
-        userId: string,
+        // userId: string,
         workoutId: string
     ): Promise<WorkoutEnity | null >{
         const workout = await this.workoutRepository.findById(
-            workoutId,userId
+            workoutId
         );
 
         if(!workout){
@@ -60,44 +62,50 @@ export class WorkOutService implements WorkoutServiceInterface {
         return workout
     }
 
-    async update (
-        userId: string,
-        dto: UpdateWorkoutDto,
-        wrokoutId: string,
-    ): Promise<WorkoutEnity>{
-        
-        const workout = await this.workoutRepository.findById(
-            userId,
-            wrokoutId,
+   async update(
+    userId: string,
+    dto: UpdateWorkoutDto,
+    workoutId: string,
+): Promise<WorkoutEnity> {
+    const workout = await this.workoutRepository.findById(workoutId)
+
+    if (!workout) {
+        throw new Error('Workout not found')
+    }
+
+    if (dto.preloadWorkoutId !== undefined) {
+        const preloadWorkout = PRELOADED_WORKOUTS.find(
+            (workouts) => workouts.id === dto.preloadWorkoutId,
         )
 
-        if(dto.preloadWorkoutId !== undefined){
-            const preloadWorkout = PRELOADED_WORKOUTS.find(
-                (workout) => workout.id === dto.preloadWorkoutId,
-            )
-             workout.preloadWorkout = preloadWorkout.name
+        if (!preloadWorkout) {
+            throw new Error('Preloaded workout not found')
         }
 
-        if(dto.weekDay ! == undefined ){
-            workout.weekDay = dto.weekDay
-        }
-
-        return this.workoutRepository.update(workout)
+        workout.preloadWorkout = preloadWorkout.name
     }
+
+    if (dto.weekDay !== undefined) {
+        workout.weekDay = dto.weekDay
+    }
+
+    return this.workoutRepository.update(workout)
+}
 
     getPreloadedWorkouts(){
         return PRELOADED_WORKOUTS;
     }
 
     async delete(
-        userId: string,
+      
         workoutId: string,
     ) : Promise<void> {
 
         const workout = await this.workoutRepository.findById(
-            userId, workoutId
+          workoutId
         )
 
         await this.workoutRepository.delete(workout)
+        throwError
     } 
 }
