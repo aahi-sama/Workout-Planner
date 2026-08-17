@@ -15,6 +15,8 @@ export interface WorkoutServiceInterface {
 
     findById(userId: string, workoutId: string): Promise <WorkoutEnity>;
 
+    findByDay(weekday: string) : Promise <WorkoutEnity[] | null >
+
     update(
         userId: string,
         dto: UpdateWorkoutDto,

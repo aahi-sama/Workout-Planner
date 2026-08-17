@@ -8,8 +8,8 @@ export class ExerciseEntity {
     @PrimaryGeneratedColumn('uuid')
     id:string
 
-    @Column()
-    userId:string;
+    // @Column()
+    // userId:string;
 
     @Column()
     workoutId: string;
@@ -23,10 +23,10 @@ export class ExerciseEntity {
     @Column({type: 'integer'})
     reps: number;
 
-    // @ManyToOne(
-    //     () => WorkoutEnity,
-    //     (workout) => workout.exercises
-    // )
+    @ManyToOne(
+        () => WorkoutEnity,
+        (workout) => workout.exercises
+    )
 
     workout: WorkoutEnity
     

@@ -31,20 +31,23 @@ export class WorkoutEnity {
         }
     )
 
-    // @OneToMany(
-    //     ()=> ExerciseEntity,
-    //     (exercise) => exercise.workout
-    // )
-
-    // exercises: ExerciseEntity[]
-
-    @JoinColumn({ name: 'userId'})
+      @JoinColumn({ name: 'userId'})
     user: UserOrmEntity;
+
+    @OneToMany(
+        ()=> ExerciseEntity,
+        (exercise) => exercise.workout
+    )
+
+    exercises: ExerciseEntity[]
+
+  
 
     @Column({
         type : 'enum',
         enum : WeekDay
     })
+
     weekDay: WeekDay;
 
     @Column()

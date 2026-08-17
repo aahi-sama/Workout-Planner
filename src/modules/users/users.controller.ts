@@ -10,6 +10,7 @@ import { GetProfileUseCase } from './application/use-cases/get-profile.use-case'
 import { UpdateUserDto } from './application/dtos/update.user.dto';
 import { UpdateUser } from './application/use-cases/update-user.use-case';
 import { User } from './domain/entites/user.entity';
+import { GetUserById } from './application/use-cases/get-user-by-id.use-case';
 // @Controller('users')
 // export class UsersController {}
 
@@ -20,7 +21,8 @@ export class UsersController {
         private readonly findUserUseCase:findAllUser,
         private readonly jwtservice:JwtService,
         private readonly getprofileUser:GetProfileUseCase,
-        private readonly updateUser:UpdateUser
+        private readonly updateUser:UpdateUser,
+        private readonly getUserById:GetUserById
     ){}
 
     @UseGuards(JwtAuthGuard)
@@ -44,6 +46,11 @@ export class UsersController {
     @Get()
     async findAll(){
         return this.findUserUseCase.execute()
+    }
+
+    @Get(':userId')
+    async findById (@Param('userId') userId: string){
+        return this.getUserById.execute(userId)
     }
 
     //debugging

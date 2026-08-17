@@ -4,6 +4,7 @@ import { CurrentUser } from '../modules/auth/decorators/current-user.decorator';
 import { CreateWorkoutDto } from './dto/create-workout.dto';
 import { JwtAuthGuard } from '../modules/auth/infrastructure/jwt/jwt.auth.guard';
 import { UpdateWorkoutDto } from './dto/update-workout.dto';
+import { WeekDay } from './workout.enttiy';
 
 @Controller('work-out')
 @UseGuards(JwtAuthGuard)
@@ -33,6 +34,13 @@ export class WorkOutController {
     ){
         return this.workoutservice.findAll(user.id)
     }
+
+    @Get('day/:weekDay')
+    async findByDay(
+        @Param('weekDay') weekDay: WeekDay,
+    ){
+        return this.workoutservice.findByDay(weekDay)
+    } 
 
     @Patch(':id')
     async update(

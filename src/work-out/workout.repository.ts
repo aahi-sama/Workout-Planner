@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { WorkoutEnity } from "./workout.enttiy";
+import { WeekDay, WorkoutEnity } from "./workout.enttiy";
 import { Repository } from "typeorm";
 
 
@@ -25,6 +25,18 @@ export class WorkoutRepository {
         })
     }
 
+    async findByday(weekDay:WeekDay): Promise <WorkoutEnity[]> {
+        return this.repository.find({
+            where: {
+                weekDay,
+            },
+            relations :{
+                exercises: true,
+            }
+        })
+        
+    }
+
     async findById(workoutId: string) : Promise <WorkoutEnity>{
         const workout= await this.repository.findOne({
             where: {
@@ -33,7 +45,7 @@ export class WorkoutRepository {
             }
 
         });
-        console.log('workout:', workout);
+        // console.log('workout:', workout);
         return workout;
     }
 

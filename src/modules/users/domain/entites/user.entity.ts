@@ -6,6 +6,7 @@ export class User {
         public password: string,
         public readonly createdAt: Date,
         public updatedAt: Date,
+        public workouts = [],
     ){}
 
     getId(): string {

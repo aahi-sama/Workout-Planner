@@ -3,7 +3,7 @@ import { WorkoutRepository } from './workout.repository';
 import { WorkoutServiceInterface } from './workoout-service.instance';
 import { CreateUserDto } from '../modules/users/application/dtos/create.user.dto';
 import { CreateWorkoutDto } from './dto/create-workout.dto';
-import { WorkoutEnity } from './workout.enttiy';
+import { WeekDay, WorkoutEnity } from './workout.enttiy';
 import { UpdateWorkoutDto } from './dto/update-workout.dto';
 import { PRELOADED_WORKOUTS } from './data/preloaded-workout';
 import { throwError } from 'rxjs';
@@ -40,6 +40,16 @@ export class WorkOutService implements WorkoutServiceInterface {
 
         return this.workoutRepository.create(workout)
     } 
+
+    async findByDay(weekDay: WeekDay) : Promise < WorkoutEnity[]>{
+        const workout = await this.workoutRepository.findByday(weekDay);
+
+        if(!workout){
+            throw new NotFoundException('WORKOUT DIDNOT FOUND')
+        }
+
+        return workout;
+    }
 
     async findAll(
         userId: string,

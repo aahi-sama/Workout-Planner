@@ -20,7 +20,7 @@ import { ExerciseEntity } from './exercise.entity'
 
     update(
         workoutId: string,
-          exerciseId: string,
+        //   exerciseId: string,
         dto: UpdateExerciseDto,
     ) : Promise <ExerciseEntity>
 

@@ -16,31 +16,30 @@ export class ExerciseService implements ExerciseServiceInterface {
     async create ( userId:string,
          dto: CreateExerciseDto ): Promise <ExerciseEntity> {
         
-        const workout  =  await this.workoutservice.findById(dto.workoutId);
-        if(!workout){
-            throw new NotFoundException('NO USER WITH THIS ID');
-        }
+        // const workout  =  await this.workoutservice.findById(dto.workoutId);
+        // if(!workout){
+        //     throw new NotFoundException('NO USER WITH THIS ID');
+        // }
         // console.log(workout);
         const exercise = new ExerciseEntity();
 
-       
-        
+        // exercise.userId = userId;
         exercise.workoutId = dto.workoutId;
         exercise.name = dto.name;
         exercise.set = dto.set;
         exercise.reps = dto.reps;
 
       
-
+        console.log(exercise)
         return this.exerciseRepository.create(exercise)
 
     }
 
-    async findById(workoutId: string, exerciseId: string) : Promise <ExerciseEntity> {
+    async findById( exerciseId: string) : Promise <ExerciseEntity> {
         const exercise = await this.exerciseRepository.findById(
             exerciseId,
-            workoutId,
         );
+        console.log(exercise);
 
         if(!exercise){
             throw new NotFoundException ('exercise not found')
@@ -52,9 +51,8 @@ export class ExerciseService implements ExerciseServiceInterface {
         return await this.exerciseRepository.findAll(workoutId)
     }
 
-    async update ( workoutId: string, exersideId: string, dto: UpdateExerciseDto) : Promise < ExerciseEntity> {
+    async update ( exersideId: string, dto: UpdateExerciseDto) : Promise < ExerciseEntity> {
         const exercise =  await this.exerciseRepository.findById(
-            workoutId,
             exersideId
         )
 
@@ -78,7 +76,7 @@ export class ExerciseService implements ExerciseServiceInterface {
     }
 
     async delete ( workoutId: string, exerciseId: string  ) : Promise <void> {
-        const exercise = await this.exerciseRepository.findById(workoutId, exerciseId)
+        const exercise = await this.exerciseRepository.findById(exerciseId)
         await this.exerciseRepository.delete(exercise)
     }
 

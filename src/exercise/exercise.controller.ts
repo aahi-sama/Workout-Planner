@@ -1,8 +1,10 @@
-import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../modules/auth/infrastructure/jwt/jwt.auth.guard';
 import { ExerciseService } from './exercise.service';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { CurrentUser } from '../modules/auth/decorators/current-user.decorator';
+import { workerData } from 'node:worker_threads';
+import { UpdateExerciseDto } from './dto/update-Exercise.dto';
 
 
 
@@ -25,5 +27,29 @@ export class ExerciseController {
             dto,
         )
     }
+    @Get('workout/:workoutId')
+    async findAll(
+        @Param('workoutId') workoutId: string 
+    ){
+        return this.exerciseService.findAll(workoutId)
+    }
+
+    @Get(':exerciseId')
+    async FindById(
+        @Param('exerciseId') exerciseId: string
+    ){
+
+        return this.exerciseService.findById(exerciseId)
+    }
+
+    @Patch(':exerciseId')
+    async update(
+        @Param('exerciseId') workoutId: string,
+        @Body () dto: UpdateExerciseDto,
+    )
+    {
+        return this.exerciseService.update(workoutId, dto)
+    }
+
 
 }

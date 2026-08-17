@@ -14,8 +14,8 @@ export class GetUserById {
     ){}
 
 
-    async execute (id: string): Promise <User | null > {
-        const user = await this.userRepository.findById(id)
+    async execute (userId: string): Promise <User | null > {
+        const user = await this.userRepository.findById(userId)
         return user;
     }
 

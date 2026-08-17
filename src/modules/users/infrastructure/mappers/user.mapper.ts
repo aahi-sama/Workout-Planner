@@ -10,7 +10,10 @@ export class UserMapper {
             userOrm.password,
             userOrm.createdAt,
             userOrm.updatedAt,
+            userOrm.workouts ?? []
         );
+
+        // return User as any
     }
 
     static toOrm(user: User): UserOrmEntity{

@@ -19,15 +19,26 @@ export class TypeOrmUserRepository implements UserRepository{
         return UserMapper.toDomain(savedUser);
     }
 
-    async findById(id:string): Promise<User | null >{
+    async findById(userId:string): Promise<User | null >{
         const user= await this.repository.findOne({
-            where: {id},
+            where: {id:userId},
 
-        })
+            relations : {
+                workouts: {
+                    exercises: true
+                }
+            }
+            
+
+        },
+       
+    )
 
         if(!user){
             return null;
         }
+
+        console.log(user)
 
         return UserMapper.toDomain(user)
     }
@@ -35,6 +46,11 @@ export class TypeOrmUserRepository implements UserRepository{
     async findByEmail(email:string): Promise <User | null >{
         const user = await this.repository.findOne({
             where: {email},
+              relations : {
+                workouts: {
+                    exercises: true
+                }
+            }
         })
         if(!user){
             return null ;
@@ -49,7 +65,6 @@ export class TypeOrmUserRepository implements UserRepository{
 
         return users.map(UserMapper.toDomain);
     }
-
 
     async update(user: User): Promise <User> {
         const ormUser = await this.repository.findOne({
