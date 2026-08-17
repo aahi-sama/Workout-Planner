@@ -75,9 +75,13 @@ export class ExerciseService implements ExerciseServiceInterface {
         return this.exerciseRepository.update(exercise)
     }
 
-    async delete ( workoutId: string, exerciseId: string  ) : Promise <void> {
+    async delete ( exerciseId: string  ) : Promise <{message: string}> {
         const exercise = await this.exerciseRepository.findById(exerciseId)
+
         await this.exerciseRepository.delete(exercise)
+        return {
+            message: 'exercise deleted sucessfully',
+        }
     }
 
 }

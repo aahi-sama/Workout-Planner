@@ -21,7 +21,7 @@ export class ExerciseRepository {
     })
    }
 
-   async findById(exerciseId: string ) : Promise <ExerciseEntity | null > {
+   async findById(exerciseId: string ) : Promise <ExerciseEntity> {
     return await this.repository.findOne(({
         where: {
         id:exerciseId,

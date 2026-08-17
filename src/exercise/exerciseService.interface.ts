@@ -25,7 +25,6 @@ import { ExerciseEntity } from './exercise.entity'
     ) : Promise <ExerciseEntity>
 
     delete(
-        workoutId: string,
         exerciseId: string,
-    ): Promise<void>
+    ): Promise<{message:string}>
  } 

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../modules/auth/infrastructure/jwt/jwt.auth.guard';
 import { ExerciseService } from './exercise.service';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
@@ -27,6 +27,7 @@ export class ExerciseController {
             dto,
         )
     }
+
     @Get('workout/:workoutId')
     async findAll(
         @Param('workoutId') workoutId: string 
@@ -44,12 +45,19 @@ export class ExerciseController {
 
     @Patch(':exerciseId')
     async update(
-        @Param('exerciseId') workoutId: string,
+        @Param('exerciseId') exerciseId: string,
         @Body () dto: UpdateExerciseDto,
     )
     {
-        return this.exerciseService.update(workoutId, dto)
+        return this.exerciseService.update(exerciseId, dto)
     }
 
+    @Delete(':exerciseId')
+    async delete(
+        @Param ('exerciseId')  exerciseId: string
+    ){
+        return this.exerciseService.delete(exerciseId)
+    }
+    
 
 }
